@@ -10,4 +10,16 @@ export default class ProductController {
         const products = ProductModel.get();
         return res.render('products', { products });
     }
+
+    getAddForm(req, res) {
+        return res.render('new-product', { errorMessage: null });
+    }
+
+    addNewProduct(req, res) {
+        // console.log(req.body);
+
+        ProductModel.addProducts(req.body);
+        const products = ProductModel.get();
+        return res.redirect('/');
+    }
 }
