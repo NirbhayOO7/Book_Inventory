@@ -20,7 +20,9 @@ app.get('/new-product', (req, res, next) => {
     // console.log(req.body);
     next();
 }, productController.getAddForm);
-app.post('/add-product', validationMiddleware, productController.addNewProduct);
+app.post('/add-product', validationMiddleware.validateNewProductRequest, productController.addNewProduct);
+app.get('/update-product/:id', productController.getUpdateProductView);
+app.post('/post-update-product', validationMiddleware.validateUpdateProductRequest, productController.updateProduct);
 
 app.listen(port, (err) => {
     if (err) {

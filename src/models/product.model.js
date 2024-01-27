@@ -16,6 +16,16 @@ export default class ProductModel {
     static addProducts(body) {
         products.push(new ProductModel(products.length + 1, body.name, body.desc, body.price, body.imageUrl));
     }
+
+    static getById(id) {
+        return products.find((p) => p.id == id);
+    }
+
+    static updateProduct(body) {
+        let index = products.findIndex((p) => p.id == body.id);
+
+        products[index] = new ProductModel(body.id, body.name, body.desc, body.price, body.imageUrl);
+    }
 }
 
 const products = [
