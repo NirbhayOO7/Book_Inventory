@@ -26,6 +26,12 @@ export default class ProductModel {
 
         products[index] = new ProductModel(body.id, body.name, body.desc, body.price, body.imageUrl);
     }
+
+    static deleteProduct(id) {
+        let index = products.findIndex((p) => p.id == id);
+
+        products.splice(index, 1);
+    }
 }
 
 const products = [

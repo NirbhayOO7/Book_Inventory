@@ -10,7 +10,9 @@ const port = 3000;
 const productController = new ProductController();
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('src/views'));
+
+//when we mark any folder as static folder for express server then we don't have to write the full address while linking the files present in static folders like css and js mentioned in layouts.ejs
+app.use(express.static(path.join(path.resolve(), 'src', 'assets')));
 app.set('views', path.join(path.resolve(), 'src', 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
@@ -23,6 +25,7 @@ app.get('/new-product', (req, res, next) => {
 app.post('/add-product', validationMiddleware.validateNewProductRequest, productController.addNewProduct);
 app.get('/update-product/:id', productController.getUpdateProductView);
 app.post('/post-update-product', validationMiddleware.validateUpdateProductRequest, productController.updateProduct);
+app.post('/delete-product/:id', productController.deleteProduct);
 
 app.listen(port, (err) => {
     if (err) {
