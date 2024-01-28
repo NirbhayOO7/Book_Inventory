@@ -30,7 +30,8 @@ const validateRequest = async (req, res) => {
     const rules = [
         body('name').notEmpty().withMessage('Name is required!'),
         body('price').isFloat({ gt: 0 }).withMessage('Price should be a postive value!'),
-        body('imageUrl').isURL().withMessage('Invalid URL!')
+        // later we updated the imageUrl from url to file upload for which below validation will fail as imageUrl fieldname contains file 
+        // body('imageUrl').isURL().withMessage('Invalid URL!')
     ];
 
     // 2. Run those rules

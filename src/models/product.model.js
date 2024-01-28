@@ -13,8 +13,8 @@ export default class ProductModel {
         return products;
     }
 
-    static addProducts(body) {
-        products.push(new ProductModel(products.length + 1, body.name, body.desc, body.price, body.imageUrl));
+    static addProducts(name, desc, price, imageUrl) {
+        products.push(new ProductModel(products.length + 1, name, desc, price, imageUrl));
     }
 
     static getById(id) {

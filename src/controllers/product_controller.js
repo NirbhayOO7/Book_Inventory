@@ -1,4 +1,5 @@
 import ProductModel from "../models/product.model.js";
+import path from 'path';
 
 
 export default class ProductController {
@@ -18,11 +19,18 @@ export default class ProductController {
 
     // add new product action 
     addNewProduct(req, res) {
-        // console.log(req.body);
 
-        ProductModel.addProducts(req.body);
-        const products = ProductModel.get();
+        // below lines of code used when imageUrl is url
+        // ProductModel.addProducts(req.body);
+        // const products = ProductModel.get();
+        // return res.redirect('/');
+
+        // new updated code when imageUrl is an uploaded image file 
+        let { name, desc, price } = req.body;
+        let imageFileUrl = path.join('images', req.file.filename);
+        ProductModel.addProducts(name, desc, price, imageFileUrl);
         return res.redirect('/');
+
     }
 
     // get view of update form 
@@ -54,9 +62,7 @@ export default class ProductController {
         const productFound = ProductModel.getById(id);
 
         if (productFound) {
-            console.log('delete product controller called')
             ProductModel.deleteProduct(id);
-            const products = ProductModel.get();
             return res.redirect('back');
         }
         else {
