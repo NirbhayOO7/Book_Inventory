@@ -9,3 +9,8 @@ img {
 .product-form {
     margin: 0px 80px;
 }
+
+h1 {
+    background-color: rgb(184, 147, 110);
+    padding-bottom: 2px;
+}

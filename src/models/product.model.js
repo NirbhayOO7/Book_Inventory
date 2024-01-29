@@ -21,10 +21,10 @@ export default class ProductModel {
         return products.find((p) => p.id == id);
     }
 
-    static updateProduct(body) {
-        let index = products.findIndex((p) => p.id == body.id);
+    static updateProduct(id, name, desc, price, imageUrl) {
+        let index = products.findIndex((p) => p.id == id);
 
-        products[index] = new ProductModel(body.id, body.name, body.desc, body.price, body.imageUrl);
+        products[index] = new ProductModel(id, name, desc, price, imageUrl);
     }
 
     static deleteProduct(id) {

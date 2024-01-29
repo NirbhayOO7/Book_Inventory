@@ -32,6 +32,12 @@ const validateRequest = async (req, res) => {
         body('price').isFloat({ gt: 0 }).withMessage('Price should be a postive value!'),
         // later we updated the imageUrl from url to file upload for which below validation will fail as imageUrl fieldname contains file 
         // body('imageUrl').isURL().withMessage('Invalid URL!')
+        body('imageUrl').custom((value, { req }) => {
+            if (!req.file) {
+                throw new Error('Image is required!')
+            }
+            return true;
+        }),
     ];
 
     // 2. Run those rules

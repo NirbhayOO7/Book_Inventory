@@ -50,10 +50,11 @@ export default class ProductController {
     // update product on click 
     updateProduct(req, res) {
         // console.log(req.body);
-
-        ProductModel.updateProduct(req.body);
+        let { id, name, desc, price } = req.body;
+        let imageFileUrl = path.join('images', req.file.filename);
+        ProductModel.updateProduct(id, name, desc, price, imageFileUrl);
         const products = ProductModel.get();
-        return res.render('products', { products });
+        return res.redirect('/');
     }
 
     // delete product on click 
