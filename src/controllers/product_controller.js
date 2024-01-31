@@ -9,12 +9,12 @@ export default class ProductController {
         // console.log(path.resolve());
         // return res.sendFile(path.join(path.resolve(), 'src', 'views', 'products.html'));
         const products = ProductModel.get();
-        return res.render('products', { products });
+        return res.render('products', { products, userEmail: req.session.userEmail });
     }
 
     // get form for adding new product 
     getAddForm(req, res) {
-        return res.render('new-product', { errorMessage: null });
+        return res.render('new-product', { errorMessage: null, userEmail: req.session.userEmail });
     }
 
     // add new product action 
@@ -40,7 +40,7 @@ export default class ProductController {
 
         if (productFound) {
 
-            return res.render('update-product', { product: productFound, errorMessage: null });
+            return res.render('update-product', { product: productFound, errorMessage: null, userEmail: req.session.userEmail });
         }
         else {
             return res.status(401).send('Product not found');
